@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workengine-core
+  labels:
+    app: workengine
+    component: core
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: workengine
+      component: core
+  template:
+    metadata:
+      labels:
+        app: workengine
+        component: core
+    spec:
+      containers:
+      - name: core
+        image: workengine-core:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: db-secrets
+              key: url
+        resources:
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: workengine-dashboard
+  labels:
+    app: workengine
+    component: dashboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: workengine
+      component: dashboard
+  template:
+    metadata:
+      labels:
+        app: workengine
+        component: dashboard
+    spec:
+      containers:
+      - name: dashboard
+        image: workengine-dashboard:latest
+        ports:
+        - containerPort: 3000

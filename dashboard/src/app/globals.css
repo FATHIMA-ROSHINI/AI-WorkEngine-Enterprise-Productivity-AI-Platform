@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pastel-lavender: #C7D2FE;
+  --color-pastel-mint: #6EE7B7;
+  --color-pastel-peach: #FDBA74;
+  --color-pastel-sky: #7DD3FC;
+  --color-pastel-rose: #F9A8D4;
+  --color-pastel-yellow: #FDE047;
+
+  --color-neo-bg: var(--bg);
+  --color-neo-surface: var(--surface);
+  --color-neo-border: var(--border);
+  --color-neo-accent: var(--accent);
+  --color-neo-text: var(--text);
+  --color-neo-muted: var(--slate);
+
+  --shadow-brutalist: 6px 6px 0px 0px rgba(0,0,0,1);
+  --shadow-brutalist-lg: 12px 12px 0px 0px rgba(0,0,0,1);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+
+  --radius-soft: 32px;
+
+  --animate-blob: blob 10s infinite;
+
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(50px, -80px) scale(1.2); }
+    66% { transform: translate(-40px, 40px) scale(0.8); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+}
+
+@layer base {
+  :root {
+    --bg: #F8FAFC;
+    --surface: rgba(255, 255, 255, 0.85);
+    --border: #000000;
+    --accent: #6366F1;
+    --slate: #64748B;
+    --text: #000000;
+    --blue: #3B82F6;
+    --green: #10B981;
+    --red: #EF4444;
+  }
+
+  .dark {
+    --bg: #000000;
+    --surface: rgba(30, 30, 30, 0.85);
+    --border: #FFFFFF;
+    --accent: #FDE047;
+    --slate: #94A3B8;
+    --text: #FFFFFF;
+    --blue: #38BDF8;
+    --green: #4ADE80;
+    --red: #F43F5E;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    @apply border-[4px] border-black dark:border-white;
+    background: var(--surface);
+  }
+
+  .brutalist-button {
+    @apply border-[4px] border-black bg-white px-6 py-3 font-black uppercase tracking-widest transition-all dark:border-white dark:bg-black;
+  }
+  
+  .brutalist-button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px 0px rgba(0,0,0,1);
+  }
+  
+  .dark .brutalist-button:hover {
+    box-shadow: 6px 6px 0px 0px rgba(255,255,255,1);
+  }
+
+  .pastel-blob {
+    @apply absolute rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob;
+  }
+}
+
+/* Custom Scrollbar - Bold Brutalist */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.05);
+}
+.dark ::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--text);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* Bold Brutalist Inputs */
+textarea {
+  @apply border-[4px] border-black dark:border-white rounded-none;
+}

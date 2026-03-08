@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+langgraph
+qdrant-client
+websockets
+requests
+python-dotenv
